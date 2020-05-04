@@ -27,7 +27,7 @@
       <p id="intro">La meilleure solution pour faire garder vos animaux
         avec un réseau de plus de 100 000 petsitters partout en France </p>
       <a class="btn btn-primary btn-lg mx-3" href="#" role="button">Connexion</a>
-      <button type="button" class="btn btn-success btn-primary btn-lg">inscription</button>
+      <a href="#" class="btn btn-success btn-primary btn-lg">inscription</a>
     </div>
     
     
