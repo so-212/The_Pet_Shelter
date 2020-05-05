@@ -6,7 +6,7 @@ USE anidom;
 
 CREATE TABLE proprietaire (
 id_prop MEDIUMINT NOT NULL AUTO_INCREMENT,
-titre VARCHAR(20) DEFAULT 'Monsieur ou Madame',
+titre TINYINT,
 nom char(30) NOT NULL,
 prenom char(30),
 tel char(10), /*s'assurer en front ou back que ce sont des numeros*/
