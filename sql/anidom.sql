@@ -1,10 +1,12 @@
--- CREATE DATABASE anidom;
+-- SCRIPT SQL DE CREATION DE LA BASE anidom 
+
+CREATE DATABASE anidom;
 
 USE anidom; 
 
 CREATE TABLE proprietaire (
 id MEDIUMINT NOT NULL AUTO_INCREMENT,
-titre TINYINT DEFAULT ('Monsieur ou Madame'),
+titre VARCHAR(20) DEFAULT 'Monsieur ou Madame',
 nom char(30) NOT NULL,
 prenom char(30),
 tel char(10), /*s'assurer en front ou back que ce sont des numeros*/
@@ -19,8 +21,8 @@ PRIMARY KEY(id)
 
 CREATE TABLE animal (
 id MEDIUMINT NOT NULL AUTO_INCREMENT,
-nom_animal char(20),
-photo BLOB,
+nom_animal char(20) NOT NULL,
+photo blob,
 id_generique MEDIUMINT ,
 id_proprietaire MEDIUMINT,
 PRIMARY KEY(id)
