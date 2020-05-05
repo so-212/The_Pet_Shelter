@@ -5,27 +5,29 @@ CREATE DATABASE anidom;
 USE anidom; 
 
 CREATE TABLE proprietaire (
-id MEDIUMINT NOT NULL AUTO_INCREMENT,
+id_prop MEDIUMINT NOT NULL AUTO_INCREMENT,
 titre VARCHAR(20) DEFAULT 'Monsieur ou Madame',
 nom char(30) NOT NULL,
 prenom char(30),
 tel char(10), /*s'assurer en front ou back que ce sont des numeros*/
-PRIMARY KEY(id)
+PRIMARY KEY(id_prop)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 CREATE TABLE espece(
-id MEDIUMINT NOT NULL AUTO_INCREMENT,
+id_esp MEDIUMINT NOT NULL AUTO_INCREMENT,
 nom_espece char (30) NOT NULL, /*rentrer un nom obligatoire*/
-PRIMARY KEY(id)
+PRIMARY KEY(id_esp)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 CREATE TABLE animal (
-id MEDIUMINT NOT NULL AUTO_INCREMENT,
+id_ani MEDIUMINT NOT NULL AUTO_INCREMENT,
 nom_animal char(20) NOT NULL,
 photo blob,
-id_generique MEDIUMINT ,
-id_proprietaire MEDIUMINT,
-PRIMARY KEY(id)
+id_esp  MEDIUMINT ,
+id_prop MEDIUMINT,
+PRIMARY KEY(id_ani),
+FOREIGN KEY (id_esp) REFERENCES espece(id_esp) ,
+FOREIGN KEY (id_prop) REFERENCES proprietaire(id_prop)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci; 
 
 /* précise l'interclassement cad la maniére dont Sql 
