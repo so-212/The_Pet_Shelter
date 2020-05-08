@@ -1,4 +1,31 @@
 
+body{
+	color: white;
+}
+
+
+
+form{
+	margin-left: auto;
+}
+
+.display-4{
+	font-family: 'Pacifico', cursive;
+}
+
+.btn-jumb{
+heigth: min-content!important;
+
+}
+
+
+.display-inline{
+	display: flex;
+	flex-direction: row;
+
+}
+
+
 #intro{
 	margin-bottom:5rem;
 }
@@ -6,6 +33,23 @@
 .mx-3{
 	margin-left: 0rem !important;
 }
+
+
+/*couleur de fond jumbotron*/
 .jumbotron{
-	background-color: green;
+background: #1e3c72;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #2a5298, #1e3c72);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #2a5298, #1e3c72); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+
+/*largeur input recherche*/
+.input-sm{
+	width: 92%;
+}
+
+.form-group{
+
+	display: inline-block;
+
 }
