@@ -30,27 +30,26 @@
       <p id="intro">La meilleure solution pour faire garder vos animaux
         avec un réseau de plus de 100 000 petsitters partout en France </p>
       <div class="display-inline">  
-        <a class="btn btn-primary btn-lg mx-3 btn-jumb" href="#" role="button">Connexion</a>
-        <a href="#" class="btn btn-success btn-primary btn-lg btn-jumb ">inscription</a>
+        <a class="btn btn-primary btn-lg mx-3 " href="#" style="height: min-content;" role="button">Connexion</a>
+        <a href="#" id ="incription" style="height: min-content;"   class="btn btn-success btn-primary btn-lg">inscription</a>
 
-<!-- probleme de modal ici et resolu sur stackoverflow: le modal doit etre décleché manuellement https://stackoverflow.com/questions/34284820/triggering-bootstrap-modal-on-form-submit-and-not-on-click  -->
 
-        <form method="post" action="LandingPage.php" >
-         
-
-          <div class="form-group mt-5">
-
-            <label for="exampleInputEmail1">Recherche animal par nom :</label>
-            <input type="text" name="name" class="form-control input-sm input-lg" id="exampleInputEmail1" aria-describedby="emailHelp" required="true">
-      
-          </div>
-          <button type="submit" class="btn btn-primary">Rechercher</button>
-
-        </form>
 
 
     </div>
 
+        <form method="post" action="recherche_par_nom_action.php"  >
+         
+
+          <div class="form-group mt-4 search-form ">
+
+            <label for="exampleInputEmail1">Recherche animal par nom :</label>
+            <input type="text" name="name" class="form-control input-sm input-lg" id="exampleInputEmail1" aria-describedby="emailHelp" required="true">
+          <button type="submit" class="btn btn-primary my-2" style="height: min-content;">Rechercher</button>
+      
+          </div>
+
+        </form>
      
 
 

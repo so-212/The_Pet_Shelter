@@ -13,11 +13,15 @@ form{
 	font-family: 'Pacifico', cursive;
 }
 
-.btn-jumb{
-heigth: min-content!important;
+#inscription{
+heigth: min-content !important;
 
 }
 
+.search-form{
+	display: flex;
+	flex-direction: row;
+}
 
 .display-inline{
 	display: flex;
@@ -27,7 +31,7 @@ heigth: min-content!important;
 
 
 #intro{
-	margin-bottom:5rem;
+	margin-bottom:3rem;
 }
 
 .mx-3{
