@@ -17,7 +17,7 @@
 
     <title>Pet Shelter</title>
   </head>
-  <body class="container">
+  <body class="container" data-spy="scroll" data-target="#myScrollspy" data-offset="20">
 
 
   <!-- jumbotron bootstrap -->
@@ -38,28 +38,42 @@
 
     </div>
 
-        <form method="post" action="recherche_par_nom_action.php"  >
+        <form method="post" >
          
 
-          <div class="form-group mt-4 search-form ">
+          <div class="form-group mt-4 search-form">
 
             <label for="exampleInputEmail1">Recherche animal par nom :</label>
             <input type="text" name="name" class="form-control input-sm input-lg" id="exampleInputEmail1" aria-describedby="emailHelp" required="true">
           <button type="submit" class="btn btn-primary my-2" style="height: min-content;">Rechercher</button>
+          <?php
+
+              include 'si_nom_existe_pas.php';
+
+          ?>
+
+
       
           </div>
 
         </form>
      
 
-
+           
     </div> 
 
 
 
-    <div class="container">
+    <div class="container container-card">
+
+      <?php include 'recherche_par_nom_action.php' ?>
+     
+    </div>
+
+    <div class="container container-badges mb-4">
       
-       
+      <?php  include 'badges_especes.php' ?>
+
 
     </div>
 
