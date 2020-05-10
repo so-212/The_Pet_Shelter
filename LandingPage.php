@@ -46,6 +46,10 @@
             <label for="exampleInputEmail1">Recherche animal par nom :</label>
             <input type="text" name="name" class="form-control input-sm input-lg" id="exampleInputEmail1" aria-describedby="emailHelp" required="true">
           <button type="submit" class="btn btn-primary my-2" style="height: min-content;">Rechercher</button>
+
+
+<!--affichage d'un message d'alerte si le nom de l'animal n'existe pas en base-->
+
           <?php
 
               include 'si_nom_existe_pas.php';
@@ -62,14 +66,6 @@
            
     </div> 
 
-
-
-    <div class="container container-card">
-
-      <?php include 'recherche_par_nom_action.php' ?>
-     
-    </div>
-
     <div class="container container-badges mb-4">
       
       <?php  include 'badges_especes.php' ?>
@@ -77,16 +73,13 @@
 
     </div>
 
+<!--affichage d'une card si le nom rentré correspond à une entrée en base-->
 
+    <div class="container container-card">
 
-
-
-
-
-
-
-
-    
+      <?php include 'recherche_par_nom_action.php' ?>
+     
+    </div>
 
 
     

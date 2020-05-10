@@ -27,9 +27,9 @@ try {
 
 		foreach ($req as $row => $col) {
 
-				 $html .= '<button type="button" class="btn btn-primary mx-3">'.
-				  $col['espece'].' <span class="badge badge-light">'.$col['Nb'].'</span>
-				</button>';
+				 $html .= '<a href="liste_animaux.php?espece='.$col['espece'].'" class="btn btn-primary mr-2">'.
+				  $col['espece'].' <span class="badge badge-light ml-3 mr-3">'.$col['Nb'].'</span>
+				</a>';
 
 		}
 

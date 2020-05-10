@@ -22,10 +22,11 @@ require_once('db_connect_inc.php');
 
 	<nav aria-label="breadcrumb">
 	  <ol class="breadcrumb">
-	    <li class="breadcrumb-item"><a href="#">Accueil</a></li>
+	    <li class="breadcrumb-item"><a href="LandingPage.php">Accueil</a></li>
 	    <li class="breadcrumb-item active" aria-current="page">Liste des animaux</li>
 	  </ol>
 	</nav>
+
 
 	<?php 
 
@@ -35,6 +36,21 @@ require_once('db_connect_inc.php');
 
 			$sql = 'SELECT a.id_ani AS "identifiant", a.nom_animal AS "nom", e.nom_espece AS "espece", p.nom AS "propriétaire", a.photo
 				FROM (animal AS a INNER JOIN espece AS e ON a.id_esp = e.id_esp) INNER JOIN proprietaire AS p ON a.id_prop = p.id_prop';
+
+
+				// ajout d'une clause where pour les bagdges de landingpage depuis on passe le nom de l'animal en param 
+
+
+
+
+			if(isset($_GET['espece']) && !empty($_GET['espece'])){
+
+
+				// $espece  = htmlspecialchars($_GET['espece']);
+				$sql .= " WHERE e.nom_espece = '".$_GET['espece']."'"; 
+
+
+			}
 			
 			$data = $db->prepare($sql);
 			$query = $data->execute();

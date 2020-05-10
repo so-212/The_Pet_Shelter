@@ -44,7 +44,7 @@ if(isset($_POST['name']) && !empty($_POST['name'])){
 
 		if($req){
 
-				$html = '<div id="myScrollspy" class="card mt-5" style="width: 18rem;">
+				$html = '<div id="myScrollspy" class="card mt-5 mb-5" style="width: 18rem;">
 				  <img src="img/noir.png" class="card-img-top" alt="...">
 				  <div class="card-body">';
 
