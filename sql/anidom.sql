@@ -1,34 +1,125 @@
 -- SCRIPT SQL DE CREATION DE LA BASE anidom 
+DROP DATABASE IF EXISTS ANIDOM; 
 
-CREATE DATABASE anidom;
+CREATE DATABASE ANIDOM;
 
-USE anidom; 
+USE ANIDOM; 
 
-CREATE TABLE proprietaire (
-id_prop MEDIUMINT NOT NULL AUTO_INCREMENT,
-titre TINYINT,
-nom char(30) NOT NULL,
-prenom char(30),
-tel char(10), /*s'assurer en front ou back que ce sont des numeros*/
-PRIMARY KEY(id_prop)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+CREATE TABLE REGIONS (
+	id INT(9) NOT NULL AUTO_INCREMENT,
+    nom_région VARCHAR(50),
+    PRIMARY KEY (id)
+)  ENGINE=INNODB DEFAULT CHARSET=UTF8 COLLATE = UTF8_GENERAL_CI;
 
-CREATE TABLE espece(
-id_esp MEDIUMINT NOT NULL AUTO_INCREMENT,
-nom_espece char (30) NOT NULL, /*rentrer un nom obligatoire*/
-PRIMARY KEY(id_esp)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+CREATE TABLE UTILISATEURS (
+    id INT(9) NOT NULL AUTO_INCREMENT,
+    titre TINYINT,
+    nom CHAR(30) NOT NULL,
+    prenom CHAR(30),
+    tel CHAR(10),
+    mail VARCHAR(50),
+    pass VARCHAR(20),
+    pseudo VARCHAR(20),
+    login VARCHAR(50),
+    regions_id INT(9),
+    statut_utilisateur ENUM('01', '02', '03'),
+    note_petsitter DECIMAL(2 , 1 ),
+    PRIMARY KEY (id),
+     FOREIGN KEY (regions_id)
+        REFERENCES REGIONS (id)
+)  ENGINE=INNODB DEFAULT CHARSET=UTF8 COLLATE = UTF8_GENERAL_CI;
 
-CREATE TABLE animal (
-id_ani MEDIUMINT NOT NULL AUTO_INCREMENT,
-nom_animal char(20) NOT NULL,
-photo blob,
-id_esp  MEDIUMINT ,
-id_prop MEDIUMINT,
-PRIMARY KEY(id_ani),
-FOREIGN KEY (id_esp) REFERENCES espece(id_esp) ,
-FOREIGN KEY (id_prop) REFERENCES proprietaire(id_prop)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci; 
+CREATE TABLE ESPECES (
+    id INT(9) NOT NULL AUTO_INCREMENT,
+    nom_espece CHAR(30) NOT NULL,
+    PRIMARY KEY (id)
+)  ENGINE=INNODB DEFAULT CHARSET=UTF8 COLLATE = UTF8_GENERAL_CI;
+
+CREATE TABLE ANIMAUX (
+    id INT(9) NOT NULL AUTO_INCREMENT,
+    nom_animal CHAR(20) NOT NULL,
+    statut_animal ENUM('garde', 'adoption'),
+    photo BLOB,
+    esp_id INT(9),
+    prop_id INT(9),
+    PRIMARY KEY (id),
+    FOREIGN KEY (esp_id)
+        REFERENCES ESPECES (id),
+    FOREIGN KEY (prop_id)
+        REFERENCES UTILISATEURS (id)
+)  ENGINE=INNODB DEFAULT CHARSET=UTF8 COLLATE = UTF8_GENERAL_CI;
+
+CREATE TABLE PRODUITS (
+    id INT(9) NOT NULL AUTO_INCREMENT,
+    nom_produit VARCHAR(45) NOT NULL,
+    description VARCHAR(100),
+    prix DECIMAL(5, 2),
+    PRIMARY KEY (id)
+)  ENGINE=INNODB DEFAULT CHARSET=UTF8 COLLATE = UTF8_GENERAL_CI;
+
+
+CREATE TABLE ASSOC_UTILISATEURS_PRODUITS (
+    id INT(9) NOT NULL AUTO_INCREMENT,
+    utilisateurs_id INT(9),
+    produits_id INT(9),
+    PRIMARY KEY (id),
+    FOREIGN KEY (utilisateurs_id)
+        REFERENCES UTILISATEURS (id),
+    FOREIGN KEY (produits_id)
+        REFERENCES PRODUITS (id)
+)  ENGINE=INNODB DEFAULT CHARSET=UTF8 COLLATE = UTF8_GENERAL_CI;
+
+CREATE TABLE DEMANDES_GARDES (
+    id INT(9) NOT NULL AUTO_INCREMENT,
+    date_debut DATETIME,
+    date_fin DATETIME,
+    utilisateurs_id INT(9),
+    animaux_id INT(9),
+    PRIMARY KEY (id),
+    FOREIGN KEY (utilisateurs_id)
+        REFERENCES UTILISATEURS (id),
+    FOREIGN KEY (animaux_id)
+        REFERENCES ANIMAUX (id)
+)  ENGINE=INNODB DEFAULT CHARSET=UTF8 COLLATE = UTF8_GENERAL_CI;
+
+CREATE TABLE ASSOC_UTILISATEURS_DEMANDES_GARDES (
+	id INT(9) NOT NULL AUTO_INCREMENT,
+    utilisateurs_id INT(9),
+    commentaires VARCHAR(100),
+    demandes_gardes_id INT(9),
+    date_candidature DATETIME,
+    date_acceptation DATETIME,
+    PRIMARY KEY (id),
+    FOREIGN KEY (utilisateurs_id)
+        REFERENCES UTILISATEURS (id),
+    FOREIGN KEY (demandes_gardes_id)
+        REFERENCES DEMANDES_GARDES (id)
+)  ENGINE=INNODB DEFAULT CHARSET=UTF8 COLLATE = UTF8_GENERAL_CI;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
 
 /* précise l'interclassement cad la maniére dont Sql 
 compare les caracteres ds un jeu de caracteres

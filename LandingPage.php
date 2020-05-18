@@ -17,7 +17,7 @@
 
     <title>Pet Shelter</title>
   </head>
-  <body class="container" data-spy="scroll" data-target="#myScrollspy" data-offset="20">
+  <body class="container-fluid" data-spy="scroll" data-target="#myScrollspy" data-offset="20">
 
 
   <!-- jumbotron bootstrap -->
@@ -31,12 +31,111 @@
         avec un réseau de plus de 100 000 petsitters partout en France </p>
       <div class="display-inline">  
         <a class="btn btn-primary btn-lg mx-3 " href="#" style="height: min-content;" role="button">Connexion</a>
-        <a href="#" id ="incription" style="height: min-content;"   class="btn btn-success btn-primary btn-lg">inscription</a>
+        <a href="#" id ="incription" style="height: min-content;"   class="btn btn-success btn-primary btn-lg" data-toggle="modal" data-target="#myModal">inscription</a>
 
+        <!-- formulaire d inscription en modal bootstrap  -->
 
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Inscrivez-vous</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+
+                <form method="post" action="subscription_action.php" class="subscription-form">
+                  
+                  <!-- nom -->
+                  <div class="form-group col-xs-3">
+                    <label for="nom">Nom</label>
+                    <input type="text" name="name"  class="form-control" id="nom" required>
+                  </div>
+
+                  <!-- prenom -->
+                  <div class="form-group">
+                    <label for="prenom">Prénom</label>
+                    <input type="text" name="firstname" class="form-control" id="prenom" required>
+                  </div>
+
+                  <!-- telephone -->
+                  <div class="form-group">
+                    <label for="tel">Téléphone</label>
+                    <input type="password" name="tel" class="form-control" id="tel" required>
+                  </div>
+
+                  <!-- adresse mail -->
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Email address</label>
+                    <input type="email" name="mail" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <small id="emailHelp" class="form-text text-muted">Nous ne partagons votre adresse mail avec personne d'autre.</small>
+                  </div>
+
+                  <!-- pseudo -->
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Nom d'utilisateur</label>
+                    <input type="text" name="pseudo" class="form-control" id="exampleInputPassword1" required>
+                  </div>
+
+                  <!-- région -->
+                  <div class="form-group">
+                      <label for="exampleFormControlSelect1">Région</label>
+                      <select name="nom_region" class="form-control" id="exampleFormControlSelect1" required>
+                        <!-- gérer dynamiquement la liste déroulante via la table region ac un foreach -->
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                      </select>
+                    </div>
+
+                  <!-- statut -->
+                     <label>
+                      Etes-vous un : 
+                    </label>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="status" value="proprietaire" id="exampleRadios1" value="option1" checked required>
+                    <label class="form-check-label" for="exampleRadios1">
+                      Propriétaire
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="statut" value="petsitter" id="exampleRadios2" value="option2" required>
+                    <label class="form-check-label" for="exampleRadios2">
+                     Petsitter
+                    </label>
+                  </div>
+
+                  <!-- mot de passe -->
+                  <div class="form-group my-2">
+                    <label for="exampleInputPassword1">Mot de passe</label>
+                    <input type="password" name="pass" class="password" class="form-control" id="exampleInputPassword1" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Confirmez le mot de passe</label>
+                    <input type="password" class="password" name="repass" class="form-control" id="exampleInputPassword1" required>
+                  </div>
+                 
+                  <button type="submit" class="btn btn-primary align-items-center">Inscription</button>
+                </form>
+
+              </div>
+              <div class="modal-footer">
+                
+              </div>
+            </div>
+          </div>
+        </div>
 
 
     </div>
+
+
+      <!--   formulaire de recherche par nom de l'animal  -->
 
         <form method="post" >
          
@@ -66,7 +165,7 @@
            
     </div> 
 
-    <div class="container container-badges mb-4">
+    <div class="container-fluid container-badges mb-4">
       
       <?php  include 'badges_especes.php' ?>
 
@@ -75,7 +174,7 @@
 
 <!--affichage d'une card si le nom rentré correspond à une entrée en base-->
 
-    <div class="container container-card">
+    <div class="container-flui container-card">
 
       <?php include 'recherche_par_nom_action.php' ?>
      

@@ -5,6 +5,9 @@ body{
 	background: -webkit-linear-gradient(to top, #eef2f3, #8e9eab);  /* Chrome 10-25, Safari 5.1-6 */
 	background: linear-gradient(to top, #eef2f3, #8e9eab); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
+
+	background-repeat: no-repeat;
+
 }
 
 .card{
@@ -29,10 +32,18 @@ padding-left: 0%;
 
 }
 
-
-form{
-	margin-left: auto;
+.modal{
+	color: black;
 }
+h5{
+	text-align: center;
+}
+
+.subscription-form{
+	color: black;
+	display: grid;
+}
+
 
 .display-4{
 	font-family: 'Pacifico', cursive;
@@ -81,4 +92,7 @@ background: linear-gradient(to right, #2a5298, #1e3c72); /* W3C, IE 10+/ Edge, F
 
 	display: inline-block;
 
+}
+.form-control{
+	width: 50%;
 }
