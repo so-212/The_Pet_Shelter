@@ -17,7 +17,7 @@
 
     <title>Pet Shelter</title>
   </head>
-  <body class="container-fluid" data-spy="scroll" data-target="#myScrollspy" data-offset="20">
+  <body class="container" data-spy="scroll" data-target="#myScrollspy" data-offset="20">
 
 
   <!-- jumbotron bootstrap -->
@@ -51,7 +51,7 @@
                   <!-- nom -->
                   <div class="form-group col-xs-3">
                     <label for="nom">Nom</label>
-                    <input type="text" name="name"  class="form-control" id="nom" required>
+                    <input type="text" name="name"  class="form-control" id="nom">
                   </div>
 
                   <!-- prenom -->
@@ -76,28 +76,41 @@
                   <!-- pseudo -->
                   <div class="form-group">
                     <label for="exampleInputPassword1">Nom d'utilisateur</label>
-                    <input type="text" name="pseudo" class="form-control" id="exampleInputPassword1" required>
+                    <input type="text" name="username" class="form-control" id="exampleInputPassword1" required>
                   </div>
 
                   <!-- région -->
                   <div class="form-group">
                       <label for="exampleFormControlSelect1">Région</label>
-                      <select name="nom_region" class="form-control" id="exampleFormControlSelect1" required>
-                        <!-- gérer dynamiquement la liste déroulante via la table region ac un foreach -->
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                      <select name="region" class="form-control" id="exampleFormControlSelect1" required>
+                        <!-- gestion dynamique de la liste déroulante via la table REGIONS ac un foreach -->
+                        <?php 
+                        include_once 'db_connect_inc.php';
+
+                        $sql = 'SELECT nom_region FROM REGIONS';
+                        $data = $db->query($sql);
+                        $row = $data->fetchAll();
+
+                        $html = '';
+
+                        foreach ($row as $col) {
+                          $html .=   '<option>'.$col['nom_region'].'</option>';
+                        }
+                        echo $html
+
+                       ?>
+
+
                       </select>
                     </div>
+
 
                   <!-- statut -->
                      <label>
                       Etes-vous un : 
                     </label>
                   <div class="form-check">
-                    <input class="form-check-input" type="radio" name="status" value="proprietaire" id="exampleRadios1" value="option1" checked required>
+                    <input class="form-check-input" type="radio" name="status" value="proprietaire" id="exampleRadios1" value="option1"  required>
                     <label class="form-check-label" for="exampleRadios1">
                       Propriétaire
                     </label>
@@ -117,10 +130,10 @@
 
                   <div class="form-group">
                     <label for="exampleInputPassword1">Confirmez le mot de passe</label>
-                    <input type="password" class="password" name="repass" class="form-control" id="exampleInputPassword1" required>
+                    <input type="password" class="password" name="passRepeat" class="form-control" id="exampleInputPassword1" required>
                   </div>
                  
-                  <button type="submit" class="btn btn-primary align-items-center">Inscription</button>
+                  <button type="submit" name="submit" class="btn btn-primary align-items-center">Inscription</button>
                 </form>
 
               </div>

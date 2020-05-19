@@ -6,12 +6,12 @@ try {
 		$sql = 'SELECT 
 				    e.nom_espece espece, COUNT(*) AS Nb
 				FROM
-				    animal AS a
+				    ANIMAUX AS a
 				        INNER JOIN
-				    espece AS e USING (id_esp)
+				    ESPECES AS e ON a.esp_id = e.id
 				GROUP BY espece DESC
 				ORDER BY Nb';
-
+				
 
 
 

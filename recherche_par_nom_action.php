@@ -1,18 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
-
-    <title>Pet Shelter</title>
-  </head>
-  <body class="container">
- -->
-
-
 <?php 
 include_once 'db_connect_inc.php';
 
@@ -23,17 +8,17 @@ if(isset($_POST['name']) && !empty($_POST['name'])){
 
 	try{
 		$sql = 'SELECT 
-				    a.id_ani AS "identifiant",
+				    a.id AS "identifiant",
 				    a.nom_animal AS "nom",
 				    e.nom_espece AS "espece",
-				    p.nom AS "propriétaire",
+				    u.nom AS "propriétaire",
 				    a.photo
 			   FROM
-		    		(animal AS a
-		       INNER JOIN espece AS e USING(id_esp))
-		       INNER JOIN proprietaire AS p USING(id_prop)
+		    		(ANIMAUX AS a
+		       INNER JOIN ESPECES AS e ON a.esp_id = e.id)
+		       INNER JOIN UTILISATEURS AS u ON a.prop_id = u.id
 			   WHERE
-					a.nom_animal = ?' ;
+					a.nom_animal = ?';
 
 		$param = array($pet_name);
 
@@ -62,16 +47,10 @@ if(isset($_POST['name']) && !empty($_POST['name'])){
 			echo $html;
 		}
 
-
-
-
-
-
-
 		}//bloc try
 
 	catch(PDOException $err){
-		header('location:LandingPage.php');
+		$err->getMessage();
 	}
 
 }//bloc if isset...

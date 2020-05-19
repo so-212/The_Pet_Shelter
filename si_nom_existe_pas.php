@@ -9,17 +9,17 @@
 
                 try{
                   $sql = 'SELECT 
-                          a.id_ani AS "identifiant",
-                          a.nom_animal AS "nom",
-                          e.nom_espece AS "espece",
-                          p.nom AS "propriétaire",
-                          a.photo
-                       FROM
-                          (animal AS a
-                         INNER JOIN espece AS e USING(id_esp))
-                         INNER JOIN proprietaire AS p USING(id_prop)
-                       WHERE
-                        a.nom_animal = ?' ;
+                            a.id AS "identifiant",
+                            a.nom_animal AS "nom",
+                            e.nom_espece AS "espece",
+                            u.nom AS "propriétaire",
+                            a.photo
+                          FROM
+                            (ANIMAUX AS a
+                          INNER JOIN ESPECES AS e ON a.esp_id = e.id)
+                          INNER JOIN UTILISATEURS AS u ON a.prop_id = u.id
+                         WHERE
+                          a.nom_animal = ?' ;
 
                   $param = array($pet_name);
 
@@ -46,7 +46,7 @@
 
               }catch(PDOException $err){
 
-                    header('location:LandingPage.php');
+                  $err->getMessage();
 
                   }
 

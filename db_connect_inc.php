@@ -2,7 +2,7 @@
 
 try {
 			define('HOST', 'localhost');
-			define('BASE', 'anidom');
+			define('BASE', 'ANIDOM');
 			define('USER', 'two_one_two');
 			define('PASS', '12');
 

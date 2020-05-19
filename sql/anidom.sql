@@ -7,20 +7,21 @@ USE ANIDOM;
 
 CREATE TABLE REGIONS (
 	id INT(9) NOT NULL AUTO_INCREMENT,
-    nom_région VARCHAR(50),
+    nom_region VARCHAR(50),
     PRIMARY KEY (id)
 )  ENGINE=INNODB DEFAULT CHARSET=UTF8 COLLATE = UTF8_GENERAL_CI;
 
 CREATE TABLE UTILISATEURS (
     id INT(9) NOT NULL AUTO_INCREMENT,
     titre TINYINT,
-    nom CHAR(30) NOT NULL,
-    prenom CHAR(30),
+    nom VARCHAR(30) NOT NULL,
+    prenom VARCHAR(30),
     tel CHAR(10),
     mail VARCHAR(50),
-    pass VARCHAR(20),
-    pseudo VARCHAR(20),
+    pass VARCHAR(100),
+    username VARCHAR(20),
     login VARCHAR(50),
+    regions VARCHAR(50),
     regions_id INT(9),
     statut_utilisateur ENUM('01', '02', '03'),
     note_petsitter DECIMAL(2 , 1 ),
@@ -98,28 +99,33 @@ CREATE TABLE ASSOC_UTILISATEURS_DEMANDES_GARDES (
 
 
 
+-- insertions enoncé 
+-- 
+INSERT INTO ESPECES (nom_espece) VALUES ('cheval'),('chien'), ('chat');
+
+INSERT INTO UTILISATEURS (titre, nom, prenom) VALUES (1, 'BLANC-SEC', 'Adèle');
+INSERT INTO UTILISATEURS (titre, nom, prenom) VALUES (0, 'CASTAFIORE', 'Bianca');
+INSERT INTO UTILISATEURS (titre, nom, prenom) VALUES (2, 'LUKE', 'Lucky');
+INSERT INTO UTILISATEURS (titre, nom, prenom) VALUES (2, 'TALON', 'Achille');
+
+INSERT INTO ANIMAUX (nom_animal, photo, esp_id, prop_id) VALUES ('Félix', '', 3, 1);
+INSERT INTO ANIMAUX (nom_animal, photo, esp_id, prop_id) VALUES ('Jolly Jumper', '', 1, 2);
+INSERT INTO ANIMAUX (nom_animal, photo, esp_id, prop_id) VALUES ('Garfield', '', 3, 3);
+INSERT INTO ANIMAUX (nom_animal, photo, esp_id, prop_id) VALUES ('Rantanplan', '', 2, 4);
+INSERT INTO ANIMAUX (nom_animal, photo, esp_id, prop_id) VALUES ('Idefix', '', 2, 4);
+
+-- insertion régions ds table REGIONS
+INSERT INTO REGIONS (nom_region) VALUES ('Guadeloupe'),('Martinique'),('Guyane'),
+('La Réunion'),('Mayotte'),('Ile-de-France'),('Centre-Val de Loire'),
+('Bourgogne-Franche-Comté'),('Normandie'),('Haut-de-France'),('Grand Est'),
+('Pays de la Loire'),('Bretagne'),('Nouvelle-Aquitaine'),('Occitanie'),('Auvergne-Rhône-Alpes'),
+('Provence-Alpes-Côte d\'Azur'), ('Corse');
 
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
 
 /* précise l'interclassement cad la maniére dont Sql 
 compare les caracteres ds un jeu de caracteres
