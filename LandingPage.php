@@ -21,8 +21,20 @@
 
 
   <!-- jumbotron bootstrap -->
+  <!-- affichage d un alert si formulaire d inscription passé -->
+  <?php 
+    if (isset($_GET['subscribed'])){
 
-    <div class="jumbotron mt-5 mx-10">
+      $html = '<div class="alert alert-success mt-2" role="alert">
+                  Vous pouvez désormais vous connecter en tant qu\'utilisateur 
+              </div>';
+      echo $html;
+      //faire disparaitre le alert au refresh de la page
+
+    }
+   ?>
+
+    <div class="jumbotron mt-4 mx-10">
       <h1 class="display-4">Pet Shelter</h1>
       <p class="lead">Bienvenue sur Pet Shelter !
         </p>
@@ -63,7 +75,7 @@
                   <!-- telephone -->
                   <div class="form-group">
                     <label for="tel">Téléphone</label>
-                    <input type="password" name="tel" class="form-control" id="tel" required>
+                    <input type="tel" name="tel" class="form-control" id="tel" required>
                   </div>
 
                   <!-- adresse mail -->
@@ -110,13 +122,13 @@
                       Etes-vous un : 
                     </label>
                   <div class="form-check">
-                    <input class="form-check-input" type="radio" name="status" value="proprietaire" id="exampleRadios1" value="option1"  required>
+                    <input class="form-check-input" type="radio" name="status" value="01" id="exampleRadios1" value="01" >
                     <label class="form-check-label" for="exampleRadios1">
                       Propriétaire
                     </label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="radio" name="statut" value="petsitter" id="exampleRadios2" value="option2" required>
+                    <input class="form-check-input" type="radio" name="status" value="02" id="exampleRadios2" value="02">
                     <label class="form-check-label" for="exampleRadios2">
                      Petsitter
                     </label>

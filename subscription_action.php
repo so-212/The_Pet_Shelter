@@ -68,11 +68,19 @@ if(empty($name) || empty($firstname) || empty($tel) || empty($mail) || empty($us
  	}
 //verifier que telephone est bien un nombre de 10 chiffre
 
+ 	else if (strlen($tel) != 10 || ctype_digit($tel) == false) {
+
+ 		header('location:LandingPage.php?error=invalid_tel&name='.$name.'&firstname='.$firstname.'&tel='.$tel.'&mail='.$mail.'&username='.$username.'&region='.$region.'&status='.$status);
+
+ 		exit();
+ 	}
+
 
 //vérifier si username déja existant, necessaire de faire un appel ds la bdd via une requete sql
 
 	
 		try{
+
 
 			$sql = "SELECT COUNT(*) AS Nb FROM UTILISATEURS WHERE username = ?";
 			$params = array($username);
@@ -93,7 +101,9 @@ if(empty($name) || empty($firstname) || empty($tel) || empty($mail) || empty($us
 				//nous avons (securisé() $_POST et vérifié la validité des principaux inputs, nous lançons donc la requete d'insertion dans UTILISATEURS de ANIDOM
 
 
-			$sql = 'INSERT INTO UTILISATEURS (nom, prenom, tel, mail, username, regions, pass) VALUES (:nom, :prenom, :tel, :mail, :username, :region, :pass)';
+			
+
+			$sql = 'INSERT INTO UTILISATEURS (nom, prenom, tel, mail, username, regions, statut_utilisateur, pass) VALUES (:nom, :prenom, :tel, :mail, :username, :region, :statut_utilisateur, :pass)';
 			$pass = sha1(md5($pass).sha1($mail));
 			$params = array(
 				':nom'   => htmlspecialchars($name),
@@ -102,12 +112,18 @@ if(empty($name) || empty($firstname) || empty($tel) || empty($mail) || empty($us
 				':mail'   => htmlspecialchars($mail),
 				':username' => htmlspecialchars($username),
 				':region'  => htmlspecialchars($region),
-				// ':statut_utilisateur' => htmlspecialchars($status),
+				':statut_utilisateur' => htmlspecialchars($status),
 				':pass'   => $pass
 			);
 			$data = $db->prepare($sql);
 			$data->execute($params);
 
+
+			//envoi mail confirmation d'inscription + revoie vers page d'accueil ac message vous pouvez desormais vous connecter en tant que...
+
+			header('location:LandingPage.php?subscribed');
+
+				
 			}
 
 
@@ -119,7 +135,7 @@ if(empty($name) || empty($firstname) || empty($tel) || empty($mail) || empty($us
 			
 		
 
-		//envoie d'un mail de confirmation d'inscription
+		
 
 }
 	
