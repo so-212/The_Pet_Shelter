@@ -104,7 +104,7 @@ if(empty($name) || empty($firstname) || empty($tel) || empty($mail) || empty($us
 			
 
 			$sql = 'INSERT INTO UTILISATEURS (nom, prenom, tel, mail, username, regions, statut_utilisateur, pass) VALUES (:nom, :prenom, :tel, :mail, :username, :region, :statut_utilisateur, :pass)';
-			$pass = sha1(md5($pass).sha1($mail));
+			$pass =sha1(md5($pass) . sha1($mail));
 			$params = array(
 				':nom'   => htmlspecialchars($name),
 				':prenom' => htmlspecialchars($firstname),

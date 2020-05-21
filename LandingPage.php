@@ -17,7 +17,7 @@
 
     <title>Pet Shelter</title>
   </head>
-  <body class="container" data-spy="scroll" data-target="#myScrollspy" data-offset="20">
+  <body class="container-fluid" data-spy="scroll" data-target="#myScrollspy" data-offset="20">
 
 
   <!-- jumbotron bootstrap -->
@@ -25,9 +25,12 @@
   <?php 
     if (isset($_GET['subscribed'])){
 
-      $html = '<div class="alert alert-success mt-2" role="alert">
-                  Vous pouvez désormais vous connecter en tant qu\'utilisateur 
-              </div>';
+      $html = '<div class="mt-2 alert alert-success alert-dismissible fade show" role="alert">
+                  <strong>Félicitation!</strong> Vous êtes désormais inscrit à The Pet shelter.
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>';
       echo $html;
       //faire disparaitre le alert au refresh de la page
 
@@ -42,7 +45,50 @@
       <p id="intro">La meilleure solution pour faire garder vos animaux
         avec un réseau de plus de 100 000 petsitters partout en France </p>
       <div class="display-inline">  
-        <a class="btn btn-primary btn-lg mx-3 " href="#" style="height: min-content;" role="button">Connexion</a>
+        <a class="btn btn-primary btn-lg mx-3 " href="#" style="height: min-content;" role="button" data-toggle="modal" data-target="#myModal-login">Connexion</a>
+
+        <!-- formulaire de connexion -->
+
+        <div class="modal fade" id="myModal-login" tabindex="-1" role="dialog">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">connectez-vous</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+
+                <form method="post" action="login_action.php" class="subscription-form">
+
+                      <!-- login = adresse-mail -->
+
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">login</label>
+                        <input type="email" name="mail" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                      </div>
+
+                      <!-- mot de passe -->
+
+                      <div class="form-group my-2">
+                        <label for="exampleInputPassword1">Mot de passe</label>
+                        <input type="password" name="pass" class="password form-control" class="form-control" id="exampleInputPassword1" required>
+                      </div>
+
+                      <button type="submit" name="submit" class="btn btn-primary align-items-center">connexion</button>
+                </form>
+
+              </div>
+             <div class="modal-footer">
+                       
+          </div>
+         </div>
+        </div>
+      </div>   
+                  
+
+
         <a href="#" id ="incription" style="height: min-content;"   class="btn btn-success btn-primary btn-lg" data-toggle="modal" data-target="#myModal">inscription</a>
 
         <!-- formulaire d inscription en modal bootstrap  -->
@@ -137,12 +183,12 @@
                   <!-- mot de passe -->
                   <div class="form-group my-2">
                     <label for="exampleInputPassword1">Mot de passe</label>
-                    <input type="password" name="pass" class="password" class="form-control" id="exampleInputPassword1" required>
+                    <input type="password" name="pass" class="password form-control" class="form-control" id="exampleInputPassword1" required>
                   </div>
 
                   <div class="form-group">
                     <label for="exampleInputPassword1">Confirmez le mot de passe</label>
-                    <input type="password" class="password" name="passRepeat" class="form-control" id="exampleInputPassword1" required>
+                    <input type="password" class="password form-control" name="passRepeat" class="form-control" id="exampleInputPassword1" required>
                   </div>
                  
                   <button type="submit" name="submit" class="btn btn-primary align-items-center">Inscription</button>
