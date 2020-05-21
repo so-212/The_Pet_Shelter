@@ -47,6 +47,7 @@ h5{
 
 .display-4{
 	font-family: 'Pacifico', cursive;
+	font-size: 6.5rem;
 }
 
 #inscription{
@@ -95,4 +96,20 @@ background: linear-gradient(to right, #2a5298, #1e3c72); /* W3C, IE 10+/ Edge, F
 }
 .form-control{
 	width: 92%;
+}
+ 
+/*list-group*/
+
+.list{
+	height: 60px;
+}
+.list-link{
+	color: white;
+	border-radius: 0px;
+
+}
+.list-link:hover{
+	color: white;
+	text-decoration: none;
+
 }

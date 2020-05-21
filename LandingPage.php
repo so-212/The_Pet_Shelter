@@ -1,3 +1,20 @@
+<?php
+session_start(); // demarre ou restaurer une session
+
+//test si une session est active ou non 
+
+if (isset($_SESSION['connected']) && $_SESSION['connected']) {
+
+  $connected = true;
+
+}else{
+
+  $connected = false;
+
+}
+
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -23,19 +40,54 @@
   <!-- jumbotron bootstrap -->
   <!-- affichage d un alert si formulaire d inscription passé -->
   <?php 
+
     if (isset($_GET['subscribed'])){
 
-      $html = '<div class="mt-2 alert alert-success alert-dismissible fade show" role="alert">
+  ?>
+
+      <div class="mt-2 alert alert-success alert-dismissible fade show" role="alert">
                   <strong>Félicitation!</strong> Vous êtes désormais inscrit à The Pet shelter.
                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>';
-      echo $html;
-      //faire disparaitre le alert au refresh de la page
 
-    }
-   ?>
+    // succes connexion
+  
+    <?php } ?>
+
+
+    <?php if(isset($_GET['auth']) && $_GET['auth'] == 'true'){ ?>
+
+      <div class="mt-2 alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Vous êtes connecté</strong> 
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+      </div>
+
+    <?php } ?>
+
+
+
+    <?php 
+
+    // echec de la connexion
+
+    if (isset($_GET['auth']) && $_GET['auth'] == 'false'){ ?>
+
+
+               <div class="mt-2 alert alert-danger alert-dismissible fade show" role="alert">
+                  <strong>echec de la connexion</strong> 
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+    
+
+
+
+    <?php } ?>
 
     <div class="jumbotron mt-4 mx-10">
       <h1 class="display-4">Pet Shelter</h1>
@@ -44,8 +96,22 @@
       <hr class="my-4">
       <p id="intro">La meilleure solution pour faire garder vos animaux
         avec un réseau de plus de 100 000 petsitters partout en France </p>
-      <div class="display-inline">  
-        <a class="btn btn-primary btn-lg mx-3 " href="#" style="height: min-content;" role="button" data-toggle="modal" data-target="#myModal-login">Connexion</a>
+      <div class="display-inline"> 
+
+
+
+      
+
+          <a href="logout.php" type="button" class="btn btn-danger" style="display: <?php echo ($connected?'' : 'none'); ?>">Déconnexion</a>
+      
+     
+
+
+
+
+
+
+        <a class="btn btn-primary btn-lg mx-3 " href="#" style="height: min-content; display: <?php echo ($connected? 'none' : ''); ?>" role="button" data-toggle="modal" data-target="#myModal-login">Connexion</a>
 
         <!-- formulaire de connexion -->
 
@@ -89,7 +155,7 @@
                   
 
 
-        <a href="#" id ="incription" style="height: min-content;"   class="btn btn-success btn-primary btn-lg" data-toggle="modal" data-target="#myModal">inscription</a>
+        <a href="#" id ="incription" style="height: min-content; display: <?php echo ($connected? 'none' : '') ?>"   class="btn btn-success btn-primary btn-lg" data-toggle="modal" data-target="#myModal">inscription</a>
 
         <!-- formulaire d inscription en modal bootstrap  -->
 
@@ -236,12 +302,24 @@
            
     </div> 
 
+<!-- list group-->
+
+    <div class="btn-group mb-3 list" role="group" aria-label="Basic example">
+      <button type="button" class="btn btn-secondary list"><a href="liste_animaux.php" class="list-link"> liste des animaux</a></button>
+      <button type="button" class="btn btn-secondary list"><a href="#" class="list-link"> ajouter modifier un animal </a></button>
+      <button type="button" class="btn btn-secondary list"><a href="#" class="list-link"> Produits aniamliers </a></button>
+    </div>
+
+
     <div class="container-fluid container-badges mb-4">
       
       <?php  include 'badges_especes.php' ?>
 
 
     </div>
+
+
+
 
 <!--affichage d'une card si le nom rentré correspond à une entrée en base-->
 
@@ -250,6 +328,36 @@
       <?php include 'recherche_par_nom_action.php' ?>
      
     </div>
+
+    <!-- caroussel -->
+
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="img/ouvrir-une-animalerie.jpg" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="img/ouvrir-une-animalerie.jpg" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="img/ouvrir-une-animalerie.jpg" class="d-block w-100" alt="...">
+        </div>
+      </div>
+      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+
 
 
     
