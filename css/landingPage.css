@@ -18,6 +18,10 @@ body{
 	padding-left: 0%;
 }
 
+.lead{
+	font-size: 2.3rem;
+	font-family: 'Dancing Script', cursive;
+}
 
 .container-badges{
 padding-left: 0%;
@@ -69,6 +73,7 @@ heigth: min-content !important;
 
 #intro{
 	margin-bottom:3rem;
+	font-size: 1.8rem;
 }
 
 .mx-3{

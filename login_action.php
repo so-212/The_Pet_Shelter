@@ -28,7 +28,7 @@ if (isset($_POST['submit'])) {
 
 			// on verifie si les champs existent deja en base
 
-			include_once 'db_connect_inc.php';
+			include_once 'common/db_connect_inc.php';
 
 			$sql = 'SELECT COUNT(*) AS nb FROM UTILISATEURS WHERE mail = :mail AND pass = :pass';
 			$params = array(

@@ -1,6 +1,14 @@
-<?php  
+<?php 
 
-require_once('db_connect_inc.php');
+//ne pas tomber sur "ce document a expiré" au click page precedente navigateur
+ini_set('session.cache_limiter','public');
+session_cache_limiter(false);
+
+
+include 'common/session.php';
+
+
+require_once('common/db_connect_inc.php');
 
 ?>
 <!DOCTYPE html>
@@ -57,9 +65,9 @@ require_once('db_connect_inc.php');
 
 			if(isset($_GET['espece']) && !empty($_GET['espece'])){
 
-
+				$espece = htmlspecialchars($_GET['espece']);
 				// $espece  = htmlspecialchars($_GET['espece']);
-				$sql .= " WHERE e.nom_espece = '".$_GET['espece']."'"; 
+				$sql .= " WHERE e.nom_espece = '".$espece."'"; 
 
 
 			}

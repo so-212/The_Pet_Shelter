@@ -1,6 +1,6 @@
 <?php
 
-              include_once 'db_connect_inc.php';
+              include_once 'common/db_connect_inc.php';
 
 
               if(isset($_POST['name']) && !empty($_POST['name'])){

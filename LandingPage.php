@@ -25,6 +25,8 @@ if (isset($_SESSION['connected']) && $_SESSION['connected']) {
     <!-- police google font Pacifico -->
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet"> 
 
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet"> 
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
@@ -78,7 +80,7 @@ if (isset($_SESSION['connected']) && $_SESSION['connected']) {
 
 
                <div class="mt-2 alert alert-danger alert-dismissible fade show" role="alert">
-                  <strong>echec de la connexion</strong> 
+                  <strong>echec de la connexion</strong><p>mot de passe ou login incorrect</p>
                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
@@ -170,7 +172,7 @@ if (isset($_SESSION['connected']) && $_SESSION['connected']) {
               </div>
               <div class="modal-body">
 
-                <form method="post" action="subscription_action.php" class="subscription-form">
+                <form method="post" action="inscription/subscription_action.php" class="subscription-form">
                   
                   <!-- nom -->
                   <div class="form-group col-xs-3">
@@ -209,7 +211,7 @@ if (isset($_SESSION['connected']) && $_SESSION['connected']) {
                       <select name="region" class="form-control" id="exampleFormControlSelect1" required>
                         <!-- gestion dynamique de la liste déroulante via la table REGIONS ac un foreach -->
                         <?php 
-                        include_once 'db_connect_inc.php';
+                        include_once 'common/db_connect_inc.php';
 
                         $sql = 'SELECT nom_region FROM REGIONS';
                         $data = $db->query($sql);
@@ -313,7 +315,11 @@ if (isset($_SESSION['connected']) && $_SESSION['connected']) {
 
     <div class="container-fluid container-badges mb-4">
       
-      <?php  include 'badges_especes.php' ?>
+      <?php if ($connected) {
+
+        include 'badges_especes.php';
+
+      }   ?>
 
 
     </div>

@@ -1,6 +1,6 @@
 <?php
 
-include_once 'db_connect_inc.php';
+include_once 'common/db_connect_inc.php';
 
 // l'utilisateur a bien cliqué sur inscription du formulaire
 if(isset($_POST['submit'])){

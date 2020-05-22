@@ -1,4 +1,11 @@
 <?php 
+// include 'common/session.php';
+if (empty($_SESSION['connected'])) {
+
+	header('location:LandingPage.php');
+	exit();
+
+}
 
 try {
 	
