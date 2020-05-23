@@ -1,9 +1,10 @@
 <?php
 session_start(); // demarre ou restaurer une session
 
+
 //test si une session est active ou non 
 
-if (isset($_SESSION['connected']) && $_SESSION['connected']) {
+if(isset($_SESSION['connected']) && $_SESSION['connected']) {
 
   $connected = true;
 
@@ -172,7 +173,7 @@ if (isset($_SESSION['connected']) && $_SESSION['connected']) {
               </div>
               <div class="modal-body">
 
-                <form method="post" action="inscription/subscription_action.php" class="subscription-form">
+                <form method="post" action="subscription_action.php" class="subscription-form">
                   
                   <!-- nom -->
                   <div class="form-group col-xs-3">
@@ -308,7 +309,87 @@ if (isset($_SESSION['connected']) && $_SESSION['connected']) {
 
     <div class="btn-group mb-3 list" role="group" aria-label="Basic example">
       <button type="button" class="btn btn-secondary list"><a href="liste_animaux.php" class="list-link"> liste des animaux</a></button>
-      <button type="button" class="btn btn-secondary list"><a href="#" class="list-link"> ajouter modifier un animal </a></button>
+      <button type="button" class="btn btn-secondary list"><a href="add_animal.php" class="list-link" data-toggle="modal" data-target="#myModal2"> ajouter un animal </a></button>
+
+<!-- modal ajout animal -->
+
+        <div class="modal" tabindex="-1" id="myModal2" role="dialog">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">ajout animal</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+
+                <form method="post" action="subscription_action.php" class="subscription-form">
+                  
+                  <!-- nom -->
+                  <div class="form-group col-xs-3">
+                    <label for="nom">Nom</label>
+                    <input type="text" name="name"  class="form-control" id="nom">
+                  </div>
+
+                  <!-- espece -->
+                  <div class="form-group">
+                    <label for="espece">escpèce</label>
+                    <input type="text" name="espece" class="form-control" id="espece" required>
+                  </div>
+
+                  <!-- propriétaire -->
+                  <div class="form-group">
+                    <label for="propriétaire">proprietaire</label>
+                    <input type="text" name="espece" class="form-control" id="proprietaire" required>
+                  </div>
+
+                  <!-- photo de l animal -->
+
+                  <div class="form-group">
+
+                         <label for="photo">photo  :</label>
+                         <input type="hidden" name="MAX_FILE_SIZE" value="1048576">
+                         <!-- correspond à un Mo -->
+                         <!-- rajouter un input cacher securisant la taille du fichier a inserer, c'est une securité pr pas faire sauter le serveur -->
+                         <!-- attention c l'input hidden qui va remonter ds le post il faut le corriger -->
+                         <input type="file" class="form-control input-lg" name="photo" id="photo">
+
+                  </div>
+
+                  <!-- statut a adopter ou non -->
+                     <label>
+                      statut de l'animal: 
+                    </label>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="status" value="01" id="exampleRadios1" value="01" >
+                    <label class="form-check-label" for="exampleRadios1">
+                      a déjà un propriétaire
+                    </label>
+                  </div>
+                  <div class="form-check mb-4">
+                    <input class="form-check-input" type="radio" name="status" value="02" id="exampleRadios2" value="02">
+                    <label class="form-check-label" for="exampleRadios2">
+                     à adopter
+                    </label>
+                  </div>
+                 
+                  <button type="submit" name="submit" class="btn btn-primary align-items-center">Inscription</button>
+                </form>
+
+
+              </div>
+              
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+      <button type="button" class="btn btn-secondary list"><a href="ajout_suppr_modif_animaux.php" class="list-link">modifier un animal</a></button>
+
       <button type="button" class="btn btn-secondary list"><a href="#" class="list-link"> Produits aniamliers </a></button>
     </div>
 

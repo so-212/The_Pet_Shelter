@@ -22,6 +22,7 @@ if(isset($_POST['submit'])){
 
 if(empty($name) || empty($firstname) || empty($tel) || empty($mail) || empty($username) || empty($region) || empty($status) || empty($pass) || empty($passRepeat)){
 
+
 	header('location:LandingPage.php?error=empty_field&name='.$name.'&firstname='.$firstname.'&tel='.$tel.'&mail='.$mail.'&username='.$username.'&region='.$region.'&status='.$status.'&pass='.$pass.'&passRepeat='.$passRepeat);
 
 //on stoppe l'execution du script
@@ -101,6 +102,7 @@ if(empty($name) || empty($firstname) || empty($tel) || empty($mail) || empty($us
 				//nous avons (securisé() $_POST et vérifié la validité des principaux inputs, nous lançons donc la requete d'insertion dans UTILISATEURS de ANIDOM
 
 
+
 			
 
 			$sql = 'INSERT INTO UTILISATEURS (nom, prenom, tel, mail, username, regions, statut_utilisateur, pass) VALUES (:nom, :prenom, :tel, :mail, :username, :region, :statut_utilisateur, :pass)';
@@ -121,7 +123,10 @@ if(empty($name) || empty($firstname) || empty($tel) || empty($mail) || empty($us
 
 			//envoi mail confirmation d'inscription + revoie vers page d'accueil ac message vous pouvez desormais vous connecter en tant que...
 
+
+
 			header('location:LandingPage.php?subscribed');
+
 
 				
 			}

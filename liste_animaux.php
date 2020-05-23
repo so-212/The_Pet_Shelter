@@ -1,9 +1,6 @@
 <?php 
 
 //ne pas tomber sur "ce document a expiré" au click page precedente navigateur
-ini_set('session.cache_limiter','public');
-session_cache_limiter(false);
-
 
 include 'common/session.php';
 
