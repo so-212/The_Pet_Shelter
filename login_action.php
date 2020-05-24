@@ -30,8 +30,10 @@ if (isset($_POST['submit'])) {
 
 			include_once 'common/db_connect_inc.php';
 
-			$sql = 'SELECT COUNT(*) AS nb FROM UTILISATEURS WHERE mail = :mail AND pass = :pass';
+			$sql = 'SELECT id, COUNT(*) AS nb FROM UTILISATEURS WHERE mail = :mail AND pass = :pass GROUP BY id LIMIT 1';
 			$params = array(
+
+				//ne pas utiliser count mais id from utilisateur et limit 1 
 
 				':mail' => $login,
 				':pass' => $pass
@@ -47,11 +49,15 @@ if (isset($_POST['submit'])) {
 
 			if((int) $row['nb'] === 1){
 
-
+				
+				// var_dump($row['id']);
 
 				session_start();
 				$_SESSION['mail'] = $login;
 				$_SESSION['connected'] = true;
+				$_SESSION['userId'] = $row['id'];
+
+				//rajouter session id utilisateur + nom + Prenom pour dire bonjour à l'utilisateur
 
 				header('location:LandingPage.php?auth=true');
 

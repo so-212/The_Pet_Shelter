@@ -17,7 +17,6 @@ if(isset($_POST['submit'])){
 	$passRepeat = $_POST['passRepeat'];
 
 
-
 //on vérifie que les champs ne sont pas vide, si vide renvoie vers LandingPage.php avec passage de parametre en URL pr etre utiliser via $_GET ds la landingPage
 
 if(empty($name) || empty($firstname) || empty($tel) || empty($mail) || empty($username) || empty($region) || empty($status) || empty($pass) || empty($passRepeat)){
@@ -82,7 +81,6 @@ if(empty($name) || empty($firstname) || empty($tel) || empty($mail) || empty($us
 	
 		try{
 
-
 			$sql = "SELECT COUNT(*) AS Nb FROM UTILISATEURS WHERE username = ?";
 			$params = array($username);
 			$data = $db->prepare($sql);
@@ -100,7 +98,6 @@ if(empty($name) || empty($firstname) || empty($tel) || empty($mail) || empty($us
 			}else{
 
 				//nous avons (securisé() $_POST et vérifié la validité des principaux inputs, nous lançons donc la requete d'insertion dans UTILISATEURS de ANIDOM
-
 
 
 			
@@ -121,6 +118,7 @@ if(empty($name) || empty($firstname) || empty($tel) || empty($mail) || empty($us
 			$data->execute($params);
 
 
+
 			//envoi mail confirmation d'inscription + revoie vers page d'accueil ac message vous pouvez desormais vous connecter en tant que...
 
 
@@ -134,7 +132,7 @@ if(empty($name) || empty($firstname) || empty($tel) || empty($mail) || empty($us
 
 		}catch(PDOException $err){
 
-			$err->getMessage();
+			echo $err->getMessage();
 
 		}
 			

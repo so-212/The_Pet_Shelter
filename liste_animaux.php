@@ -63,13 +63,13 @@ require_once('common/db_connect_inc.php');
 			if(isset($_GET['espece']) && !empty($_GET['espece'])){
 
 				$espece = htmlspecialchars($_GET['espece']);
-				// $espece  = htmlspecialchars($_GET['espece']);
 				$sql .= " WHERE e.nom_espece = '".$espece."'"; 
 
 
 			}
 			
 			$data = $db->prepare($sql);
+			//rajouter params
 			$query = $data->execute();
 			$req = $data->fetchAll();
 

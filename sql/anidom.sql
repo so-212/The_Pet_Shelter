@@ -19,7 +19,7 @@ CREATE TABLE UTILISATEURS (
     tel CHAR(10),
     mail VARCHAR(50),
     pass VARCHAR(100),
-    username VARCHAR(20),
+    username VARCHAR(50),
     login VARCHAR(50),
     regions VARCHAR(50),
     regions_id INT(9),
@@ -96,6 +96,9 @@ CREATE TABLE ASSOC_UTILISATEURS_DEMANDES_GARDES (
     FOREIGN KEY (demandes_gardes_id)
         REFERENCES DEMANDES_GARDES (id)
 )  ENGINE=INNODB DEFAULT CHARSET=UTF8 COLLATE = UTF8_GENERAL_CI;
+
+
+
 
 
 

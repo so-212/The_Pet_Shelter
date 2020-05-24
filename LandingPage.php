@@ -1,7 +1,6 @@
 <?php
 session_start(); // demarre ou restaurer une session
 
-
 //test si une session est active ou non 
 
 if(isset($_SESSION['connected']) && $_SESSION['connected']) {
@@ -46,6 +45,7 @@ if(isset($_SESSION['connected']) && $_SESSION['connected']) {
 
     if (isset($_GET['subscribed'])){
 
+    // succes connexion
   ?>
 
       <div class="mt-2 alert alert-success alert-dismissible fade show" role="alert">
@@ -53,9 +53,8 @@ if(isset($_SESSION['connected']) && $_SESSION['connected']) {
                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
-                </div>';
+                </div>
 
-    // succes connexion
   
     <?php } ?>
 
@@ -203,7 +202,7 @@ if(isset($_SESSION['connected']) && $_SESSION['connected']) {
                   <!-- pseudo -->
                   <div class="form-group">
                     <label for="exampleInputPassword1">Nom d'utilisateur</label>
-                    <input type="text" name="username" class="form-control" id="exampleInputPassword1" required>
+                    <input type="text" name="username" class="form-control" id="exampleInputPassword1" maxlength="20" required>
                   </div>
 
                   <!-- région -->
@@ -214,14 +213,14 @@ if(isset($_SESSION['connected']) && $_SESSION['connected']) {
                         <?php 
                         include_once 'common/db_connect_inc.php';
 
-                        $sql = 'SELECT nom_region FROM REGIONS';
+                        $sql = 'SELECT nom_region, id FROM REGIONS';
                         $data = $db->query($sql);
                         $row = $data->fetchAll();
 
                         $html = '';
 
                         foreach ($row as $col) {
-                          $html .=   '<option>'.$col['nom_region'].'</option>';
+                          $html .=   '<option value="'.$row['id'].'">'.$col['nom_region'].'</option>';
                         }
                         echo $html
 
@@ -324,7 +323,7 @@ if(isset($_SESSION['connected']) && $_SESSION['connected']) {
               </div>
               <div class="modal-body">
 
-                <form method="post" action="subscription_action.php" class="subscription-form">
+                <form method="post" action="add_animal.php" class="subscription-form" enctype="multipart/form-data">
                   
                   <!-- nom -->
                   <div class="form-group col-xs-3">
@@ -334,16 +333,35 @@ if(isset($_SESSION['connected']) && $_SESSION['connected']) {
 
                   <!-- espece -->
                   <div class="form-group">
-                    <label for="espece">escpèce</label>
-                    <input type="text" name="espece" class="form-control" id="espece" required>
-                  </div>
+                      <label for="exampleFormControlSelect1">Espèces</label>
+                      <select name="espece" class="form-control" id="exampleFormControlSelect1" required>
+                        <!-- gestion dynamique de la liste déroulante via la table REGIONS ac un foreach -->
+                        <?php 
+                        include_once 'common/db_connect_inc.php';
+
+                        $sql = 'SELECT nom_espece, id FROM ESPECES';
+                        $data = $db->query($sql);
+                        $row = $data->fetchAll();
+
+                        $html = '';
+
+                        foreach ($row as $col) {
+                          $html .=   '<option value="'.$col['id'].'">'.$col['nom_espece'].'</option>';
+                        }
+                        echo $html
+
+                       ?>
+
+
+                      </select>
+                    </div>
 
                   <!-- propriétaire -->
-                  <div class="form-group">
+                 <!--  <div class="form-group">//enlever proprietaire car on l'identifie ac £_SESSION, l'input est donc inutil
                     <label for="propriétaire">proprietaire</label>
-                    <input type="text" name="espece" class="form-control" id="proprietaire" required>
+                    <input type="text" name="proprietaire" class="form-control" id="proprietaire" required>
                   </div>
-
+ -->
                   <!-- photo de l animal -->
 
                   <div class="form-group">
@@ -354,23 +372,24 @@ if(isset($_SESSION['connected']) && $_SESSION['connected']) {
                          <!-- rajouter un input cacher securisant la taille du fichier a inserer, c'est une securité pr pas faire sauter le serveur -->
                          <!-- attention c l'input hidden qui va remonter ds le post il faut le corriger -->
                          <input type="file" class="form-control input-lg" name="photo" id="photo">
+                         //rajouter attribut multipartform voir mail nadji 
 
                   </div>
 
                   <!-- statut a adopter ou non -->
                      <label>
-                      statut de l'animal: 
+                      motif: 
                     </label>
                   <div class="form-check">
-                    <input class="form-check-input" type="radio" name="status" value="01" id="exampleRadios1" value="01" >
+                    <input class="form-check-input" type="radio" name="statut" value="garde" id="exampleRadios1" value="01" >
                     <label class="form-check-label" for="exampleRadios1">
-                      a déjà un propriétaire
+                      garde
                     </label>
                   </div>
                   <div class="form-check mb-4">
-                    <input class="form-check-input" type="radio" name="status" value="02" id="exampleRadios2" value="02">
+                    <input class="form-check-input" type="radio" name="statut" value="adoption" id="exampleRadios2" value="02">
                     <label class="form-check-label" for="exampleRadios2">
-                     à adopter
+                     adoption
                     </label>
                   </div>
                  
