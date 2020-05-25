@@ -40,7 +40,7 @@ CREATE TABLE ANIMAUX (
     id INT(9) NOT NULL AUTO_INCREMENT,
     nom_animal CHAR(20) NOT NULL,
     statut_animal ENUM('garde', 'adoption'),
-    photo BLOB,
+    photo LONGBLOB,
     esp_id INT(9),
     prop_id INT(9),
     PRIMARY KEY (id),

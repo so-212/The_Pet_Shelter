@@ -91,6 +91,8 @@ require_once('common/db_connect_inc.php');
 
     			$meta = $data->getColumnMeta($i);
     			$html .= '<th>'.$meta['name'].'</th>';
+    			$types[$meta['name']] = $meta['native_type'];
+
 
     		}
 
@@ -99,12 +101,20 @@ require_once('common/db_connect_inc.php');
 
     		foreach ($req as $row) {
 				$html .= '<tr>';
-				foreach ($row as $col) {
-					$html .=  '<td scope="col">'.$col.'</td>';
+				foreach ($row as $col => $val) {
+					if ($types[$col] === 'BLOB' && $val !== null) {
+
+					    $html .= '<td><img src="'.$val.'" style="width:8em;height:4.5em"></td>';
+					}else{
+
+					$html .=  '<td scope="col">'.$val.'</td>';
+				}
 				}
 				$html .= '<td scope="col"><a href="update_animal.php?row='.$row['identifiant'].'" type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal">Modifier</a></td>';
 
-				$html.= '<div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+				?>
+
+				<div class="modal fade" id="myModal" tabindex="-1" role="dialog">
 				          <div class="modal-dialog modal-lg">
 				            <div class="modal-content">
 				              <div class="modal-header">
@@ -120,19 +130,38 @@ require_once('common/db_connect_inc.php');
 				                  <!-- nom -->
 				                  <div class="form-group col-xs-3">
 				                    <label for="nom">Nom</label>
-				                    <input type="text" name="name"  class="form-control" id="nom">
+				                    <input type="text" name="name"  class="form-control" id="nom" required>
 				                  </div>
 
-				                  <!-- espece -->
-				                  <div class="form-group">
-				                    <label for="espece">espece</label>
-				                    <input type="text" name="firstname" class="form-control" id="espece">
-				                  </div>   
+				                <!-- espece -->
+				                <div class="form-group">
+				                    <label for="exampleFormControlSelect1">Espèces</label>
+				                    <select name="espece" class="form-control" id="exampleFormControlSelect1" required>
+				                      <!-- gestion dynamique de la liste déroulante via la table REGIONS ac un foreach -->
+				                      <?php 
+				                    
+
+				                      $sql = 'SELECT nom_espece, id FROM ESPECES';
+				                      $data = $db->query($sql);
+				                      $row1 = $data->fetchAll();
+
+				                      
+
+				                      foreach ($row1 as $col1) {
+				                        $html .=   '<option value="'.$col1['id'].'">'.$col1['nom_espece'].'</option>';
+				                      }
+				                      
+
+				                     ?>
+
+
+				                    </select>
+				                  </div>
 
 				                  <!-- propriétaire -->
 				                  <div class="form-group">
 				                    <label for="proprietaire">proprietaire</label>
-				                    <input type="text" name="firstname" class="form-control" id="proprietaire">				                   
+				                    <input type="text" name="proprietaire" class="form-control" id="proprietaire" required>				                   
 				                  </div>    
 
 
@@ -161,7 +190,7 @@ require_once('common/db_connect_inc.php');
 
 				    </div>
 
-				';
+			<?php
 				$html .= '<td scope="col"><a href="delete_animal.php?row='.$row['identifiant'].'" type="button" class="btn btn-danger">Supprimer</a></td>';
 
 				$html .= '</tr>';

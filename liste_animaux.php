@@ -88,6 +88,9 @@ require_once('common/db_connect_inc.php');
 
     			$meta = $data->getColumnMeta($i);
     			$html .= '<th>'.$meta['name'].'</th>';
+    			//stocke le type de la donnée associée à la colonne
+    			$types[$meta['name']] = $meta['native_type'];
+
 
     		}
 
@@ -96,8 +99,23 @@ require_once('common/db_connect_inc.php');
 
     		foreach ($req as $row) {
 				$html .= '<tr>';
-				foreach ($row as $col) {
-					$html .=  '<td scope="col">'.$col.'</td>';
+				foreach ($row as $col => $val) {
+
+					if ($types[$col] === 'BLOB' && $val !== null) {
+
+                    $html .= '<td><img src="' . $val . '" style="width:8em;height:4.5em"></td>';
+
+                }else if($types[$col] === 'BLOB' && $val === null){
+
+                	$html .= '<td><img src="uploads/noir.png" style="width:8em;height:4.5em"></td>';
+
+                }
+
+
+                else{
+
+					$html .=  '<td scope="col">'.$val.'</td>';
+				  }
 				}
 				$html .= '</tr>';
 			}

@@ -220,7 +220,7 @@ if(isset($_SESSION['connected']) && $_SESSION['connected']) {
                         $html = '';
 
                         foreach ($row as $col) {
-                          $html .=   '<option value="'.$row['id'].'">'.$col['nom_region'].'</option>';
+                          $html .=   '<option value="'.$col['id'].'">'.$col['nom_region'].'</option>';
                         }
                         echo $html
 
