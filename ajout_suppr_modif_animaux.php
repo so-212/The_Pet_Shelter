@@ -105,7 +105,12 @@ require_once('common/db_connect_inc.php');
 					if ($types[$col] === 'BLOB' && $val !== null) {
 
 					    $html .= '<td><img src="'.$val.'" style="width:8em;height:4.5em"></td>';
-					}else{
+
+					}else if($types[$col] === 'BLOB' && $val === null){
+
+                	$html .= '<td><img src="uploads/noir.png" style="width:8em;height:4.5em"></td>';
+
+                }else{
 
 					$html .=  '<td scope="col">'.$val.'</td>';
 				}
@@ -125,7 +130,7 @@ require_once('common/db_connect_inc.php');
 				              </div>
 				              <div class="modal-body">
 
-				                <form method="post" action="update_animal.php" class="subscription-form">
+				                <form method="post" action="update_animal.php?row=<?php echo $row['identifiant'] ?>" enctype="multipart/form-data" class="subscription-form">
 				                  
 				                  <!-- nom -->
 				                  <div class="form-group col-xs-3">
@@ -148,8 +153,8 @@ require_once('common/db_connect_inc.php');
 				                      
 
 				                      foreach ($row1 as $col1) {
-				                        $html2 =   '<option value="'.$col1['id'].'">'.$col1['nom_espece'].'</option>';
-				                        echo $html2;
+				                        $html1 =   '<option value="'.$col1['id'].'">'.$col1['nom_espece'].'</option>';
+				                        echo $html1;
 				                      }
 
 
@@ -161,10 +166,34 @@ require_once('common/db_connect_inc.php');
 
 				                  <!-- propriétaire -->
 				                  <div class="form-group">
-				                    <label for="proprietaire">proprietaire</label>
-				                    <input type="text" name="proprietaire" class="form-control" id="proprietaire" required>				                   
-				                  </div>    
+				                      <label for="exampleFormControlSelect1">propriétaire</label>
+				                      <select name="proprietaire" class="form-control" id="exampleFormControlSelect1" required>
+				                        <!-- gestion dynamique de la liste déroulante via la table REGIONS ac un foreach -->
+				                        <?php 
+				                      
 
+				                        $sql = 'SELECT nom, prenom, id FROM UTILISATEURS';
+				                        $data = $db->query($sql);
+				                        $row2 = $data->fetchAll();
+
+				                        
+
+				                        foreach ($row2 as $col2) {
+				                          $html2 =   '<option value="'.$col2['id'].'">'.$col2['nom'].' '.$col2['prenom'].'</option>';
+				                          echo $html2;
+				                        }
+
+
+				                       ?>
+
+
+				                      </select>
+				                    </div>
+
+
+
+
+				               
 
 				                  <div class="form-group">
 
@@ -176,6 +205,8 @@ require_once('common/db_connect_inc.php');
 				                         <input type="file" class="form-control" name="photo" id="photo">
 
 				                  </div>         
+
+
 				                 
 				                  <button type="submit" name="submit" class="btn btn-primary align-items-center">enregistrer</button>
 				                </form>
@@ -192,6 +223,7 @@ require_once('common/db_connect_inc.php');
 				    </div>
 
 			<?php
+				// $html .= '<input name="id" value="'.$col1['id'].'" type="hidden">';
 				$html .= '<td scope="col"><a href="delete_animal.php?row='.$row['identifiant'].'" type="button" class="btn btn-danger">Supprimer</a></td>';
 
 				$html .= '</tr>';

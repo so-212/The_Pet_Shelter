@@ -9,6 +9,7 @@ if (isset($_POST['submit'])) {
 	$espece = htmlspecialchars($_POST['espece']);
 	$proprietaire = htmlspecialchars($_POST['proprietaire']);
 	$photo = htmlspecialchars($_POST['MAX_FILE_SIZE']);
+	$id = htmlspecialchars($_GET['row']);
 
 
 	if (empty($name)  ||  empty($espece) || empty($proprietaire) ){
@@ -93,17 +94,21 @@ if (isset($_POST['submit'])) {
 	try {
 
 
-		$sql = 'UPDATE ANIMAUX SET nom_animal = :nom_animal, esp_id = :esp_id, prop_id = :prop_id , photo = :photo';
+		$sql = 'UPDATE ANIMAUX SET nom_animal = :nom_animal, esp_id = :esp_id, prop_id = :prop_id , photo = :photo WHERE id = :id';
 
 		$params = array(
 
-
 			':nom_animal' => $name,
 			':photo' => $photo,
-			':esp_id' =>  ,
-			':prop_id' => 
+			':esp_id' => $espece ,
+			':prop_id' => $proprietaire,
+			':id' => $id
 
 		);
+		$data = $db->prepare($sql);
+		$data->execute($params);
+
+		header('location:ajout_suppr_modif_animaux.php?update=success');
 
 
 		

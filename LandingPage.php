@@ -372,7 +372,7 @@ if(isset($_SESSION['connected']) && $_SESSION['connected']) {
                          <!-- rajouter un input cacher securisant la taille du fichier a inserer, c'est une securité pr pas faire sauter le serveur -->
                          <!-- attention c l'input hidden qui va remonter ds le post il faut le corriger -->
                          <input type="file" class="form-control input-lg" name="photo" id="photo">
-                         //rajouter attribut multipartform voir mail nadji 
+                         
 
                   </div>
 
@@ -409,7 +409,7 @@ if(isset($_SESSION['connected']) && $_SESSION['connected']) {
 
       <button type="button" class="btn btn-secondary list"><a href="ajout_suppr_modif_animaux.php" class="list-link">modifier un animal</a></button>
 
-      <button type="button" class="btn btn-secondary list"><a href="#" class="list-link"> Produits aniamliers </a></button>
+      <button type="button" class="btn btn-secondary list"><a href="#" class="list-link"> Produits animaliers </a></button>
     </div>
 
 
