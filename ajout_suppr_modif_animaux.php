@@ -148,9 +148,10 @@ require_once('common/db_connect_inc.php');
 				                      
 
 				                      foreach ($row1 as $col1) {
-				                        $html .=   '<option value="'.$col1['id'].'">'.$col1['nom_espece'].'</option>';
+				                        $html2 =   '<option value="'.$col1['id'].'">'.$col1['nom_espece'].'</option>';
+				                        echo $html2;
 				                      }
-				                      
+
 
 				                     ?>
 
