@@ -1,5 +1,5 @@
 <?php 
-// include 'common/session.php';
+include 'common/session.php';
 if (empty($_SESSION['connected'])) { //rajouter if isset
 
 	header('location:LandingPage.php');

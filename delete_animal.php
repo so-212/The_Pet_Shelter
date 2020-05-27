@@ -1,4 +1,6 @@
 <?php 
+include 'common/session.php';
+
 include 'common/db_connect_inc.php';
 
 $delete = htmlspecialchars($_GET['row']);

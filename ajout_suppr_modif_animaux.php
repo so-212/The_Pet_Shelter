@@ -115,7 +115,7 @@ require_once('common/db_connect_inc.php');
 					$html .=  '<td scope="col">'.$val.'</td>';
 				}
 				}
-				$html .= '<td scope="col"><a href="update_animal.php?row='.$row['identifiant'].'" type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal">Modifier</a></td>';
+				$html .= '<td scope="col"><button type="button" class="btn btn-warning" data-id="'.$row['identifiant'].'" >Modifier</button></td>';
 
 				?>
 
@@ -130,7 +130,12 @@ require_once('common/db_connect_inc.php');
 				              </div>
 				              <div class="modal-body">
 
-				                <form method="post" action="update_animal.php?row=<?php echo $row['identifiant'] ?>" enctype="multipart/form-data" class="subscription-form">
+
+
+				               <form method="post" action="update_animal.php?row=<script></script>" enctype="multipart/form-data" class="subscription-form">
+
+
+
 				                  
 				                  <!-- nom -->
 				                  <div class="form-group col-xs-3">
@@ -244,12 +249,34 @@ require_once('common/db_connect_inc.php');
 
 
 	<script>
+
+
+
+
 	        // Branche écouteur sur l'événement WINDOW->ONLOAD
 	        window.addEventListener(
 	            'load',
 	            function() {
+	            	let buttonWarning = document.querySelectorAll('button.btn-warning');
+	            	for (let i = 0; i < buttonWarning.length; i++) {
+	            	    buttonWarning[i].addEventListener(
+	            	        'click',
+	            	        function(){
+	            	            
+	            	           $('#myModal').modal('show');
+	            	           alert(this.dataset.id);
+	            	            
+	            	        },
+
+	            	        false
+	            	    );
+	            	}
+
+
 	                // Branche écouteur sur les A.BTN-DANGER->ONCLICK
+
 	                let buttons = document.querySelectorAll('a.btn-danger');
+
 	                for (let i = 0; i < buttons.length; i++) {
 	                    buttons[i].addEventListener(
 	                        'click',

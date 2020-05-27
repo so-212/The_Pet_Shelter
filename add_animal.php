@@ -1,5 +1,7 @@
 <?php
 session_start();
+include 'common/session.php';
+
 include_once 'common/db_connect_inc.php';
 
 

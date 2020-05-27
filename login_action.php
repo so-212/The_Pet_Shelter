@@ -1,4 +1,6 @@
 <?php 
+// include 'common/session.php';
+
 
 if (isset($_POST['submit'])) {
 
@@ -30,7 +32,7 @@ if (isset($_POST['submit'])) {
 
 			include_once 'common/db_connect_inc.php';
 
-			$sql = 'SELECT id, COUNT(*) AS nb FROM UTILISATEURS WHERE mail = :mail AND pass = :pass GROUP BY id LIMIT 1';
+			$sql = 'SELECT id, nom, prenom, COUNT(*) AS nb FROM UTILISATEURS WHERE mail = :mail AND pass = :pass GROUP BY id, nom, prenom LIMIT 1';
 			$params = array(
 
 				//ne pas utiliser count mais id from utilisateur et limit 1 
@@ -56,6 +58,9 @@ if (isset($_POST['submit'])) {
 				$_SESSION['mail'] = $login;
 				$_SESSION['connected'] = true;
 				$_SESSION['userId'] = $row['id'];
+				$_SESSION['nom'] = $row['nom'];
+				$_SESSION['prenom'] = $row['prenom'];
+
 
 				//rajouter session id utilisateur + nom + Prenom pour dire bonjour à l'utilisateur
 

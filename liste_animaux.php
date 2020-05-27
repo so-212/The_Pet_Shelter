@@ -109,10 +109,7 @@ require_once('common/db_connect_inc.php');
 
                 	$html .= '<td><img src="uploads/noir.png" style="width:8em;height:4.5em"></td>';
 
-                }
-
-
-                else{
+                }else{
 
 					$html .=  '<td scope="col">'.$val.'</td>';
 				  }

@@ -1,9 +1,8 @@
 <?php
-session_start(); // demarre ou restaurer une session
-
+session_start();// demarre ou restaurer une session
 //test si une session est active ou non 
 
-if(isset($_SESSION['connected']) && $_SESSION['connected']) {
+if(isset($_SESSION['connected']) && $_SESSION['connected']){
 
   $connected = true;
 
@@ -12,10 +11,8 @@ if(isset($_SESSION['connected']) && $_SESSION['connected']) {
   $connected = false;
 
 }
-
 ?>
-
-<!doctype html>
+<!DOCTYPE html >
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -62,7 +59,7 @@ if(isset($_SESSION['connected']) && $_SESSION['connected']) {
     <?php if(isset($_GET['auth']) && $_GET['auth'] == 'true'){ ?>
 
       <div class="mt-2 alert alert-success alert-dismissible fade show" role="alert">
-            <strong>Vous êtes connecté</strong> 
+            Ravi de vous revoir <strong> <?php echo $_SESSION['prenom'] ?>  <?php echo $_SESSION['nom']?> </strong> 
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -276,6 +273,8 @@ if(isset($_SESSION['connected']) && $_SESSION['connected']) {
 
       <!--   formulaire de recherche par nom de l'animal  -->
 
+      <?php if($connected){?>
+
         <form method="post" >
          
 
@@ -284,6 +283,8 @@ if(isset($_SESSION['connected']) && $_SESSION['connected']) {
             <label for="exampleInputEmail1">Recherche animal par nom :</label>
             <input type="text" name="name" class="form-control input-sm input-lg" id="exampleInputEmail1" aria-describedby="emailHelp" required="true">
           <button type="submit" class="btn btn-primary my-2" style="height: min-content;">Rechercher</button>
+
+
 
 
 <!--affichage d'un message d'alerte si le nom de l'animal n'existe pas en base-->
@@ -301,14 +302,15 @@ if(isset($_SESSION['connected']) && $_SESSION['connected']) {
         </form>
      
 
+      <?php  }  ?>
            
     </div> 
 
 <!-- list group-->
 
     <div class="btn-group mb-3 list" role="group" aria-label="Basic example">
-      <button type="button" class="btn btn-secondary list"><a href="liste_animaux.php" class="list-link"> liste des animaux</a></button>
-      <button type="button" class="btn btn-secondary list"><a href="add_animal.php" class="list-link" data-toggle="modal" data-target="#myModal2"> ajouter un animal </a></button>
+      <button type="button" style="display: <?php echo ($connected? '': 'none') ?>" class="btn btn-secondary list"><a href="liste_animaux.php" class="list-link"> liste des animaux</a></button>
+      <button type="button" style="display: <?php echo ($connected? '': 'none') ?>" class="btn btn-secondary list"><a href="add_animal.php" class="list-link" data-toggle="modal" data-target="#myModal2"> ajouter un animal </a></button>
 
 <!-- modal ajout animal -->
 
@@ -407,7 +409,7 @@ if(isset($_SESSION['connected']) && $_SESSION['connected']) {
 
 
 
-      <button type="button" class="btn btn-secondary list"><a href="ajout_suppr_modif_animaux.php" class="list-link">modifier un animal</a></button>
+      <button type="button" style="display: <?php echo ($connected? '': 'none') ?>" class="btn btn-secondary list"><a href="ajout_suppr_modif_animaux.php" class="list-link">modifier un animal</a></button>
 
       <button type="button" class="btn btn-secondary list"><a href="#" class="list-link"> Produits animaliers </a></button>
     </div>
