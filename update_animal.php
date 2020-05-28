@@ -11,7 +11,7 @@ if (isset($_POST['submit'])) {
 	$espece = htmlspecialchars($_POST['espece']);
 	$proprietaire = htmlspecialchars($_POST['proprietaire']);
 	$photo = htmlspecialchars($_POST['MAX_FILE_SIZE']);
-	$id = htmlspecialchars($_GET['row']);
+	$id = htmlspecialchars($_POST['id_animal']);
 
 
 	if (empty($name)  ||  empty($espece) || empty($proprietaire) ){
@@ -20,6 +20,7 @@ if (isset($_POST['submit'])) {
 		exit();
 
 	}
+
 
 	//Récuperation du fichier à téléverser 
 
@@ -110,9 +111,8 @@ if (isset($_POST['submit'])) {
 		$data = $db->prepare($sql);
 		$data->execute($params);
 
-		echo $id;
 
-		// header('location:ajout_suppr_modif_animaux.php?update=success');
+		header('location:ajout_suppr_modif_animaux.php?update=success');
 
 
 		

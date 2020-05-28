@@ -100,26 +100,57 @@ require_once('common/db_connect_inc.php');
     					<tbody>';
 
     		foreach ($req as $row) {
+
+
+    			$content = $row;
+    			
+
 				$html .= '<tr>';
 				foreach ($row as $col => $val) {
+
 					if ($types[$col] === 'BLOB' && $val !== null) {
 
 					    $html .= '<td><img src="'.$val.'" style="width:8em;height:4.5em"></td>';
 
+
 					}else if($types[$col] === 'BLOB' && $val === null){
 
-                	$html .= '<td><img src="uploads/noir.png" style="width:8em;height:4.5em"></td>';
+                		$html .= '<td><img src="uploads/noir.png" style="width:8em;height:4.5em"></td>';
 
-                }else{
+                	}	else{
 
-					$html .=  '<td scope="col">'.$val.'</td>';
+						$html .=  '<td scope="col">'.$val.'</td>';
+					}
+			
+
 				}
-				}
-				$html .= '<td scope="col"><button type="button" class="btn btn-warning" data-id="'.$row['identifiant'].'" >Modifier</button></td>';
+
+				$html .= '<td scope="col"><button type="button" class="btn btn-warning" data-id="'.$content['identifiant'].'" id="'.$content['identifiant'].'" >Modifier</button></td>';
 
 				?>
 
-				<div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+				
+			<?php
+				// $html .= '<input name="id" value="'.$col1['id'].'" type="hidden">';
+				$html .= '<td scope="col"><a href="delete_animal.php?row='.$row['identifiant'].'" type="button" class="btn btn-danger">Supprimer</a></td>';
+
+				$html .= '</tr>';
+			}
+
+			$html .= '</tbody></table>'; 
+
+			echo $html;
+
+
+			
+		} catch (PDOException $err) {
+
+			echo '<div class="alert alert-danger">'.$err->getMessage().'</div>';
+		}
+
+	?>
+
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog">
 				          <div class="modal-dialog modal-lg">
 				            <div class="modal-content">
 				              <div class="modal-header">
@@ -132,21 +163,21 @@ require_once('common/db_connect_inc.php');
 
 
 
-				               <form method="post" action="update_animal.php?row=<script></script>" enctype="multipart/form-data" class="subscription-form">
-
-
+				               <form method="post" action="update_animal.php?row=" enctype="multipart/form-data" class="subscription-form">
 
 				                  
+								<input type="hidden" id="id_animal" name="id_animal" value="<?php $content['identifiant'] ?>">
+
 				                  <!-- nom -->
 				                  <div class="form-group col-xs-3">
 				                    <label for="nom">Nom</label>
-				                    <input type="text" name="name"  class="form-control" id="nom" required>
-				                  </div>
+				                    <input type="text" name="name"  class="form-control" id="name" required>
+				                  </div>  
 
 				                <!-- espece -->
 				                <div class="form-group">
 				                    <label for="exampleFormControlSelect1">Espèces</label>
-				                    <select name="espece" class="form-control" id="exampleFormControlSelect1" required>
+				                    <select name="espece" class="form-control" id="espece" required>
 				                      <!-- gestion dynamique de la liste déroulante via la table REGIONS ac un foreach -->
 				                      <?php 
 				                    
@@ -158,10 +189,10 @@ require_once('common/db_connect_inc.php');
 				                      
 
 				                      foreach ($row1 as $col1) {
-				                        $html1 =   '<option value="'.$col1['id'].'">'.$col1['nom_espece'].'</option>';
+				                        $html1 =   '<option id="espece_value" value="'.$col1['id'].'">'.$col1['nom_espece'].'</option>';
 				                        echo $html1;
 				                      }
-
+				                      	//sortir la requete de la bouccle
 
 				                     ?>
 
@@ -172,7 +203,7 @@ require_once('common/db_connect_inc.php');
 				                  <!-- propriétaire -->
 				                  <div class="form-group">
 				                      <label for="exampleFormControlSelect1">propriétaire</label>
-				                      <select name="proprietaire" class="form-control" id="exampleFormControlSelect1" required>
+				                      <select name="proprietaire" class="form-control" id="proprietaire" required>
 				                        <!-- gestion dynamique de la liste déroulante via la table REGIONS ac un foreach -->
 				                        <?php 
 				                      
@@ -184,10 +215,10 @@ require_once('common/db_connect_inc.php');
 				                        
 
 				                        foreach ($row2 as $col2) {
-				                          $html2 =   '<option value="'.$col2['id'].'">'.$col2['nom'].' '.$col2['prenom'].'</option>';
+				                          $html2 =   '<option id="proprietaire_value" value="'.$col2['id'].'">'.$col2['nom'].' '.$col2['prenom'].'</option>';
 				                          echo $html2;
 				                        }
-
+				                        	//sortir de la boucle
 
 				                       ?>
 
@@ -227,30 +258,12 @@ require_once('common/db_connect_inc.php');
 
 				    </div>
 
-			<?php
-				// $html .= '<input name="id" value="'.$col1['id'].'" type="hidden">';
-				$html .= '<td scope="col"><a href="delete_animal.php?row='.$row['identifiant'].'" type="button" class="btn btn-danger">Supprimer</a></td>';
-
-				$html .= '</tr>';
-			}
-
-			$html .= '</tbody></table>'; 
-
-			echo $html;
-
-
-			
-		} catch (PDOException $err) {
-
-			echo '<div class="alert alert-danger">'.$err->getMessage().'</div>';
-		}
-
-	?>
 
 
 	<script>
 
 
+	
 
 
 	        // Branche écouteur sur l'événement WINDOW->ONLOAD
@@ -262,9 +275,41 @@ require_once('common/db_connect_inc.php');
 	            	    buttonWarning[i].addEventListener(
 	            	        'click',
 	            	        function(){
-	            	            
+	            	           var url = "getDetail.php?id=" + this.dataset.id; //perme tde restituer ds un JSON le detail de mon animal, getDetail.php recevra la requete
+	            	           // alert(this.dataset.id);
+	            	           let xhr = new XMLHttpRequest(); //instanciation de l'objet XMLHTTPRE...
+
+	            	           xhr.open('GET', url); //methode open prepare l'url 
+
+
+	            	           xhr.send(); //send = appel a la page 
+
+	            	           xhr.onreadystatechange = function(){ //onload capte ce le resulatat de la page getDeatil...
+
+
+	            	           	  if (xhr.status == 200 && xhr.readyState == 4) { 
+	            	           	  // analyze HTTP status of the response
+	            	           	    // alert(`Done, got ${xhr.response.length} bytes`); // response is the server
+
+									let animal = JSON.parse(xhr.responseText);
+
+									document.getElementById('name').value=animal.nom_animal;
+									document.getElementById('espece').value=animal.esp_id;
+									document.getElementById('proprietaire').value=animal.prop_id;
+									document.getElementById('id_animal').value=animal.id;
+
+									console.log(document.getElementById('id_animal').value);
+
+
+
+		            	           	    //il faut parser le json retourner par la response ici 
+	            	           	  } 
+	            	           	};
+
+
+
+
 	            	           $('#myModal').modal('show');
-	            	           alert(this.dataset.id);
 	            	            
 	            	        },
 
