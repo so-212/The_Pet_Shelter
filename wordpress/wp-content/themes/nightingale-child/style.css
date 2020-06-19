@@ -1,0 +1,72 @@
+/*
+ Theme Name: nightingale-child
+ Theme URI:    http://example.com/nightingale-child/
+ Description:  nightingale Child Theme
+ Author:       Hommani soufiane
+ Author URI:   http://example.com
+ Template:     nightingale
+ Version:      1.0.0
+ License:      GNU General Public License v2 or later
+ License URI:  http://www.gnu.org/licenses/gpl-2.0.html
+ Tags:         light, dark, two-columns, right-sidebar, responsive-layout, accessibility-ready
+ Text Domain:  nightingalechild
+*/
+
+a {
+color: red ;
+}
+h1.entry-title{
+	color: black;
+	font-style: ;
+}
+
+entry-content.p{
+	font-size: 0.5rem;
+}
+
+div#contentinner{
+	display: contents;
+}
+
+aside#secondary.widget-area{
+	display: none;
+}
+
+article#post-2{
+	margin-right: -305px;
+}
+
+
+article#post-2.post-2.page.type-page{
+	padding-left: 18rem;
+}
+
+div.nhsuk-width-container.nhsuk-header__container{
+	margin: 0px;
+}
+
+div.nhsuk-header__logo{
+	margin-left: 3rem;
+}
+
+h1.entry-title{
+	background: linear-gradient(180deg,rgba(255,255,255,0) 52%, #FFFF00 50%);
+}
+//faire un media query pr revenir au theme original nightingale
+
+@media screen and (max-width: 1860px){
+
+
+	body{
+
+		width: auto;
+	}
+
+	h1.entry-title{
+		color: red;
+		font-style: ;
+	}
+}
+
+
+

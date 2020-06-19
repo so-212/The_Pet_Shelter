@@ -1,13 +1,39 @@
 
 body{
 	color: white;
-	background: #8e9eab;  /* fallback for old browsers */
-	background: -webkit-linear-gradient(to top, #eef2f3, #8e9eab);  /* Chrome 10-25, Safari 5.1-6 */
-	background: linear-gradient(to top, #eef2f3, #8e9eab); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+	background-color: #F5F5F5;
 
 	background-repeat: no-repeat;
 
+}
+
+
+.navbar{
+	background-color: #2979FF;
+	padding: 2em 4em;
+
+}
+
+.navbar-brand{
+
+	margin-right: 8em;
+
+
+}
+
+a.nav-link{
+
+	margin-right: 5em;
+	font-size: 1.7em;
+
+}
+
+
+
+
+
+.btno{
+	color: yellow !important;
 }
 
 .card{
@@ -83,9 +109,11 @@ heigth: min-content !important;
 
 /*couleur de fond jumbotron*/
 .jumbotron{
-background: #1e3c72;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #2a5298, #1e3c72);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #2a5298, #1e3c72); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	background-image: url('../img/adoption1bis.jpg');
+		background-repeat: no-repeat;
+	background-size: cover;
+
+
 }
 
 
@@ -118,3 +146,111 @@ background: linear-gradient(to right, #2a5298, #1e3c72); /* W3C, IE 10+/ Edge, F
 	text-decoration: none;
 
 }
+
+/*login form*/
+
+div.modal-header, div.modal-footer{
+	background-color: background: #0F2027;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #2C5364, #203A43, #0F2027); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+}
+
+.modal-title{
+
+	color: white;
+	margin: auto;
+	font-size: 3em;
+	margin-left: 4.5em;
+	font-family: 'Pacifico', cursive;
+}
+
+.login1{
+	font-size: 2em;
+	font-family: 'Noto Sans HK', sans-serif;
+	with: 70%;
+
+	
+}
+
+#connexion{
+	font-size: 2em;
+	font-family: 'Noto Sans HK', sans-serif;	
+	width: 70%;
+	margin: auto;
+}
+
+ul#form_error{
+    list-style-type: none;
+    margin: auto;
+    width: 90%;
+    display: none;
+}
+ul#form_error li{
+	font-size: 1.5em;
+}
+
+
+
+
+
+
+
+
+/*subscription form*/
+
+.textInscription{
+	    font-size: 1.7em;
+
+}
+
+small#emailHelp{
+
+	font-size: initial;
+
+}
+
+#status_form{
+	
+	width: max-content;
+	margin-left: inherit;
+}
+
+input#exampleRadios1.form-check-input, input#exampleRadios2.form-check-input{
+
+	margin-top: 12px;
+
+
+}
+
+div.form-check.col{
+
+	margin-left: 2em;
+}
+
+#submit-incription{
+	width: 70%;
+	margin: auto;
+}
+
+
+/*input:valid {
+  background-color: #ddffdd;
+}
+
+input:invalid {
+  background-color: #E57373;
+}
+*/
+
+
+
+
+
+
+
+
+
+
+

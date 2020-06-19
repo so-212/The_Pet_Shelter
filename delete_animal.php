@@ -10,21 +10,13 @@ try {
 	$sql = 'DELETE FROM ANIMAUX WHERE id = :id';
 
 	$param = array(':id' => $delete);
-
-
 	$data = $db->prepare($sql);
 	$data->execute($param);
 
 	header('location:ajout_suppr_modif_animaux.php');
-
-
-
-
-
-
 	
 } catch (PDOException $err){
 	
-	$err->getMessage();
+	echo $err->getMessage();
 
 }

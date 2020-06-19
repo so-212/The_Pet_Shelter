@@ -131,7 +131,6 @@ require_once('common/db_connect_inc.php');
 
 				
 			<?php
-				// $html .= '<input name="id" value="'.$col1['id'].'" type="hidden">';
 				$html .= '<td scope="col"><a href="delete_animal.php?row='.$row['identifiant'].'" type="button" class="btn btn-danger">Supprimer</a></td>';
 
 				$html .= '</tr>';

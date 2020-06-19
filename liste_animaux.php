@@ -51,21 +51,12 @@ require_once('common/db_connect_inc.php');
 					        INNER JOIN
 					    UTILISATEURS AS u ON a.prop_id = u.id';
 
-
-
-
-
 				// ajout d'une clause where pour les bagdges de landingpage depuis on passe le nom de l'animal en param 
-
-
-
 
 			if(isset($_GET['espece']) && !empty($_GET['espece'])){
 
 				$espece = htmlspecialchars($_GET['espece']);
 				$sql .= " WHERE e.nom_espece = '".$espece."'"; 
-
-
 			}
 			
 			$data = $db->prepare($sql);

@@ -9,7 +9,6 @@ if (isset($_POST['submit'])) {
 
 	$nom = htmlspecialchars($_POST['name']);
 	$espece = htmlspecialchars($_POST['espece']);
-	// $proprietaire = htmlspecialchars($_POST['proprietaire']);
 	$photo = $_POST['MAX_FILE_SIZE'];
 	$statut = htmlspecialchars($_POST['statut']);
 
@@ -29,7 +28,6 @@ if (isset($_POST['submit'])) {
 	if (isset($_FILES['photo']) && $_FILES['photo']['error'] !== UPLOAD_ERR_NO_FILE) {
 
 		//variables de $_FILE
-
 		$file_name = $_FILES['photo']['name'];
 
 		//extension du fichier par extraction de la string apres le . (apres nom du fichier)
@@ -45,7 +43,6 @@ if (isset($_POST['submit'])) {
 
 	    // Extensions autorisées
 	    $allowed_ext = array('bmp', 'gif', 'jpg', 'jpeg', 'png');
-
 
 	    //gestion des erreurs
 
@@ -109,8 +106,6 @@ if (isset($_POST['submit'])) {
 			':prop_id' => $_SESSION['userId']
 
 		);
-
-
 
 		$data = $db->prepare($sql);
 		$data->execute($params);
